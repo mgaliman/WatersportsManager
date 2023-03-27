@@ -1,0 +1,9 @@
+<google-map height="100%" width="100%" [zoom]="zoom" [center]="center">
+    <map-marker #marker="mapMarker" *ngFor="let location of locations"
+        [position]="setPosition(location.latitude,location.longitude)" [options]="markerOptions"
+        (mapClick)="openInfoWindow(marker, location.id)">
+        <map-info-window>{{location.camp}}</map-info-window>
+    </map-marker>
+</google-map>
+
+<app-loader [loading]="loading"></app-loader>

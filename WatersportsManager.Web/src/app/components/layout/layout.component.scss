@@ -1,0 +1,13 @@
+:host {
+  .main {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+  }
+
+  .content {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+  }
+}

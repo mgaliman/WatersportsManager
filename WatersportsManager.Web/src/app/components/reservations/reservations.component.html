@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <h1>Reservations</h1>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Person</th>
+                    <th scope="col">Boat Type</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Paid</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let reservation of reservations">
+                <tr>
+                    <td scope="row">{{reservation.id}}</td>
+                    <td scope="row">{{reservation.person}}</td>
+                    <td scope="row">{{reservation.boatType}}</td>
+                    <td scope="row">{{reservation.location}}</td>
+                    <td scope="row">{{reservation.date}}</td>
+                    <td scope="row">{{reservation.isPaid}}</td>
+                    <td>
+                        <button (click)="editReservation(reservation)" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#EditPersonModal">Edit</button>
+                        <button (click)="deleteReservation(reservation)" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button (click)="initNewReservation()" class="btn btn-secondary" data-bs-toggle="modal"
+            data-bs-target="#EditPersonModal">Create</button>
+    </div>
+</div>
+
+<app-edit-reservation [reservation]="reservationToEdit"
+    (reservationUpdated)="updateReservationList($event)"></app-edit-reservation>
+<app-loader [loading]="loading"></app-loader>

@@ -1,0 +1,63 @@
+<!-- Modal -->
+<div class="modal fade" id="EditReportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit reservation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="report">
+                    <div class="form-group">
+                        <h2>{{report.title}}</h2>
+                        <div>
+                            <label>Title</label>
+                            <input [(ngModel)]="report.title" class="form-control" placeholder="Title" />
+                        </div>
+                        <div>
+                            <label>Description</label>
+                            <input [(ngModel)]="report.description" class="form-control" placeholder="Description" />
+                        </div>
+                    </div>
+                    <div>
+                        <label>Person</label>
+                        <div class="dropdown mb-2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{selectedPerson?.username}}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <ng-container *ngFor="let person of people">
+                                    <li><a class="dropdown-item" (click)="setPerson(person)">{{person.username}}</a>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Priority Type</label>
+                        <div class="dropdown mb-2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{selectedPriorityType?.type}}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <ng-container *ngFor="let priorityType of priorityTypes">
+                                    <li><a class="dropdown-item"
+                                            (click)="setPriorityType(priorityType)">{{priorityType.type}}</a></li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button *ngIf="report?.id" type="button" class="btn btn-primary"
+                    (click)="updateReport(report)">Save</button>
+                <button *ngIf="!report?.id" type="button" class="btn btn-primary"
+                    (click)="addReport(report)">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

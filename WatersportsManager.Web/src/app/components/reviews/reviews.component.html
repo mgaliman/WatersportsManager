@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <h1>Reviews</h1>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Star</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">For person</th>
+                    <th scope="col">For reservation</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let review of reviews">
+                <tr>
+                    <td scope="row">{{review.id}}</td>
+                    <td scope="row">{{review.name}}</td>
+                    <td scope="row">{{review.description}}</td>
+                    <td scope="row">
+                        <ng-container *ngFor="let number of [1, 2, 3, 4, 5]">
+                            <span class="material-symbols-outlined star"
+                                [ngClass]="{'marked': review.star >= number}">star</span>
+                        </ng-container>
+                    </td>
+                    <td scope="row">{{review.date}}</td>
+                    <td scope="row">{{review.person}}</td>
+                    <td scope="row">{{review.reservation}}</td>
+                    <td>
+                        <button (click)="editReview(review)" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#EditReviewModal">Edit</button>
+                        <button (click)="deleteReview(review)" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button (click)="initNewReview()" class="btn btn-secondary" data-bs-toggle="modal"
+            data-bs-target="#EditReviewModal">Create</button>
+    </div>
+</div>
+
+<app-edit-review [review]="reviewToEdit" (reviewUpdated)="updateReviewList($event)"></app-edit-review>
+<app-loader [loading]="loading"></app-loader>

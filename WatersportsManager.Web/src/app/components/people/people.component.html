@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <h1>People</h1>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">Skipper</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Location</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let person of people">
+                <tr>
+                    <td scope="row">{{person.id}}</td>
+                    <td>{{person.firstName}}</td>
+                    <td>{{person.lastName}}</td>
+                    <td *ngIf="person.isSkipper">Yes</td>
+                    <td *ngIf="!person.isSkipper">No</td>
+                    <td>{{person.username}}</td>
+                    <td>{{person.email}}</td>
+                    <td>{{person.role}}</td>
+                    <td>{{person.location}}</td>
+                    <td>
+                        <button *ngIf="person.id != personId" (click)="editPerson(person)" class="btn btn-primary"
+                            data-bs-toggle="modal" data-bs-target="#EditPersonModal">Edit</button>
+                        <button *ngIf="person.id != personId" (click)="deletePerson(person)"
+                            class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<app-edit-person [person]="personToEdit" (peopleUpdated)="updatePersonList($event)"></app-edit-person>
+<app-loader [loading]="loading"></app-loader>

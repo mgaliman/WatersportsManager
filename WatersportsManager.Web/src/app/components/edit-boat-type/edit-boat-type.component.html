@@ -1,0 +1,85 @@
+<!-- Modal -->
+<div class="modal fade" id="EditBoatTypeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit boat type</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="boatType">
+                    <div class="form-group">
+                        <h2>{{boatType.registration}}</h2>
+                        <div>
+                            <label>Registration</label>
+                            <input [(ngModel)]="boatType.registration" class="form-control"
+                                placeholder="Registration" />
+                        </div>
+                        <div>
+                            <label>Name</label>
+                            <input [(ngModel)]="boatType.name" class="form-control" placeholder="Name" />
+                        </div>
+                        <div>
+                            <label>Length</label>
+                            <input [(ngModel)]="boatType.length" class="form-control" placeholder="Length" />
+                        </div>
+                        <div>
+                            <label>Max Capacity</label>
+                            <input [(ngModel)]="boatType.maxCapacity" class="form-control" placeholder="Max Capacity" />
+                        </div>
+                        <div>
+                            <label>Horse Power</label>
+                            <input [(ngModel)]="boatType.horsePower" class="form-control" placeholder="Horse Power" />
+                        </div>
+                        <div>
+                            <label>Fuel Percentage</label>
+                            <input [(ngModel)]="boatType.fuelPercentage" class="form-control"
+                                placeholder="Fuel Percentage" />
+                        </div>
+                        <div>
+                            <label>Life Jackets</label>
+                            <input [(ngModel)]="boatType.lifeJackets" class="form-control" placeholder="Life Jackets" />
+                        </div>
+                        <div>
+                            <label>IsFunctional</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        [checked]="boatType.isFunctional" (change)="isFunctionalChange(true)">
+                                    <label class="form-check-label">Yes</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        [checked]="!boatType.isFunctional" (change)="isFunctionalChange(false)">
+                                    <label class="form-check-label">No</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Price</label>
+                            <div class="dropdown mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{selectedPrice?.value}}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <ng-container *ngFor="let price of prices">
+                                        <li><a class="dropdown-item" (click)="setPrice(price.id!)">{{price.value}}</a>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button *ngIf="boatType?.id" type="button" class="btn btn-primary"
+                    (click)="updateBoatType(boatType)">Save</button>
+                <button *ngIf="!boatType?.id" type="button" class="btn btn-primary"
+                    (click)="createBoatType(boatType)">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

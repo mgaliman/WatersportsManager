@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <h1>Boat Types</h1>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Registration</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Length</th>
+                    <th scope="col">Max Capacity</th>
+                    <th scope="col">Horse Power</th>
+                    <th scope="col">Fuel Percentage</th>
+                    <th scope="col">Life Jcakets</th>
+                    <th scope="col">Is Functional</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let boatType of boatTypes">
+                <tr>
+                    <td scope="row">{{boatType.id}}</td>
+                    <td scope="row">{{boatType.registration}}</td>
+                    <td scope="row">{{boatType.name}}</td>
+                    <td scope="row">{{boatType.length}} m</td>
+                    <td scope="row">{{boatType.maxCapacity}}</td>
+                    <td scope="row">{{boatType.horsePower}} hp</td>
+                    <td scope="row">{{boatType.fuelPercentage}}%</td>
+                    <td scope="row">{{boatType.lifeJackets}}</td>
+                    <td scope="row">{{boatType.isFunctional}}</td>
+                    <td scope="row">{{boatType.price}} €</td>
+                    <td>
+                        <button (click)="editBoatType(boatType)" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#EditBoatTypeModal">Edit</button>
+                        <button (click)="deleteBoatType(boatType)" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button (click)="initNewBoatType()" class="btn btn-secondary" data-bs-toggle="modal"
+            data-bs-target="#EditBoatTypeModal">Create</button>
+    </div>
+</div>
+
+<app-edit-boat-type *ngIf="boatTypeToEdit" [boatType]="boatTypeToEdit"></app-edit-boat-type>
+<app-loader [loading]="loading"></app-loader>

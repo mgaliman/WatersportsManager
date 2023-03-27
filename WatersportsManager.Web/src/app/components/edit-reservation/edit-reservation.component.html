@@ -1,0 +1,88 @@
+<!-- Modal -->
+<div class="modal fade" id="EditPersonModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit reservation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="reservation">
+                    <div class="form-group">
+                        <h2>{{reservation.registration}}</h2>
+                        <div>
+                            <label>Person</label>
+                            <div class="dropdown mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{selectedPerson?.username}}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <ng-container *ngFor="let person of people">
+                                        <li><a class="dropdown-item" (click)="setPerson(person)">{{person.username}}</a>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Boat Type</label>
+                            <div class="dropdown mb-2"></div>
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{selectedBoatType?.name}}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <ng-container *ngFor="let boatType of boatTypes">
+                                    <li><a class="dropdown-item" (click)="setBoatType(boatType)">{{boatType.name}}</a>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Location</label>
+                        <div class="dropdown mb-2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{selectedLocation?.camp}}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <ng-container *ngFor="let location of locations">
+                                    <li><a class="dropdown-item" (click)="setLocation(location)">{{location.camp}}</a>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Date</label>
+                        <input [(ngModel)]="reservation.date" class="form-control" placeholder="Date" />
+                    </div>
+                    <div>
+                        <label>Paid</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                    [checked]="reservation.isPaid" (change)="setIsPaid(true)">
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                    [checked]="!reservation.isPaid" (change)="setIsPaid(false)">
+                                <label class="form-check-label">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button *ngIf="reservation?.id" type="button" class="btn btn-primary"
+                    (click)="updateReservation(reservation)">Save</button>
+                <button *ngIf="!reservation?.id" type="button" class="btn btn-primary"
+                    (click)="addReservation(reservation)">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

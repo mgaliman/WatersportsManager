@@ -1,0 +1,75 @@
+<!-- Modal -->
+<div class="modal fade" id="EditPersonModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit person</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="person">
+                    <div class="form-group">
+                        <h2>{{person.firstName}} {{person.lastName}}</h2>
+                        <div>
+                            <label>First Name</label>
+                            <input [(ngModel)]="person.firstName" class="form-control" placeholder="First Name" />
+                        </div>
+                        <div>
+                            <label>Last Name</label>
+                            <input [(ngModel)]="person.lastName" class="form-control" placeholder="Last Name" />
+                        </div>
+                        <div>
+                            <label>Skipper</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input id="yesOption" class="form-check-input" type="radio"
+                                        name="inlineRadioOptions" [checked]="person.isSkipper"
+                                        (change)="changeIsSkipper(true)">
+                                    <label class="form-check-label" for="yesOption">Yes</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input id="noOption" class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        [checked]="!person.isSkipper" (change)="changeIsSkipper(false)">
+                                    <label class="form-check-label" for="noOption">No</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Role</label>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{selectedRole?.code}}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <ng-container *ngFor="let role of roles">
+                                        <li><a class="dropdown-item" (click)="setRole(role.id)">{{role.code}}</a></li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Location</label>
+                            <div class="dropdown mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{selectedLocation?.camp}}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <ng-container *ngFor="let location of locations">
+                                        <li><a class="dropdown-item"
+                                                (click)="setLocation(location.id)">{{location.camp}}</a></li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="updatePerson(person)">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

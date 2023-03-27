@@ -1,0 +1,79 @@
+<!-- Modal -->
+<div class="modal fade" id="EditReviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit reservation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="review">
+                    <div class="form-group">
+                        <h2>{{review.name}}</h2>
+                        <div>
+                            <label>Name</label>
+                            <input [(ngModel)]="review.name" class="form-control" placeholder="Name" />
+                        </div>
+                        <div>
+                            <label>Description</label>
+                            <input [(ngModel)]="review.description" class="form-control" placeholder="Description" />
+                        </div>
+                        <div>
+                            <span id="star1" class="material-symbols-outlined star"
+                                [ngClass]="{'marked': review.star >= 1}" (click)="review.star = 1">star</span>
+                            <span id="star2" class="material-symbols-outlined star"
+                                [ngClass]="{'marked': review.star >= 2}" (click)="review.star = 2">star</span>
+                            <span id="star3" class="material-symbols-outlined star"
+                                [ngClass]="{'marked': review.star >= 3}" (click)="review.star = 3">star</span>
+                            <span id="star4" class="material-symbols-outlined star"
+                                [ngClass]="{'marked': review.star >= 4}" (click)="review.star = 4">star</span>
+                            <span id="star5" class="material-symbols-outlined star"
+                                [ngClass]="{'marked': review.star >= 5}" (click)="review.star = 5">star</span>
+                        </div>
+                        <div>
+                            <label>Date</label>
+                            <input [(ngModel)]="review.date" class="form-control" placeholder="Date" />
+                        </div>
+                        <div>
+                            <label>For person</label>
+                            <div class="dropdown mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{selectedPerson?.username}}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <ng-container *ngFor="let person of people">
+                                        <li><a class="dropdown-item" (click)="setPerson(person)">{{person.username}}</a>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <label>For reservation</label>
+                            <div class="dropdown mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{selectedReservation.id}}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <ng-container *ngFor="let reservation of reservations">
+                                        <li><a class="dropdown-item"
+                                                (click)="setReservation(reservation)">{{reservation.id}}</a></li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button *ngIf="review?.id" type="button" class="btn btn-primary"
+                    (click)="updateReview(review)">Save</button>
+                <button *ngIf="!review?.id" type="button" class="btn btn-primary"
+                    (click)="addReview(review)">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

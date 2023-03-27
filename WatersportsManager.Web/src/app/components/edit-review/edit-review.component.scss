@@ -1,0 +1,13 @@
+:host {
+  .star {
+    color: gray;
+  }
+
+  .marked {
+    color: #f0ad4e;
+  }
+
+  .star:hover {
+    cursor: pointer;
+  }
+}

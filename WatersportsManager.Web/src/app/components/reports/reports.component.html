@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <h1>Reports</h1>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Asigned Person</th>
+                    <th scope="col">Priority Type</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let report of reports">
+                <tr>
+                    <td scope="row">{{report.id}}</td>
+                    <td scope="row">{{report.title}}</td>
+                    <td scope="row">{{report.description}}</td>
+                    <td scope="row">{{report.person}}</td>
+                    <td scope="row">{{report.priorityType}}</td>
+                    <td>
+                        <button (click)="editReport(report)" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#EditReportModal">Edit</button>
+                        <button (click)="deleteReport(report)" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button (click)="initNewReport()" class="btn btn-secondary" data-bs-toggle="modal"
+            data-bs-target="#EditReportModal">Create</button>
+    </div>
+</div>
+
+<app-edit-report [report]="reportToEdit" (reportUpdated)="updateReportList($event)"></app-edit-report>
+<app-loader [loading]="loading"></app-loader>

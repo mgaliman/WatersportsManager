@@ -1,0 +1,22 @@
+<div class="page d-flex justify-content-center align-items-center">
+
+    <form>
+        <div class="input-group mb-3">
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control-plaintext" id="staticResult"
+                    [value]="'Price of gas: ' + gasPrice">
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <input [(ngModel)]="liters" type="text" class="form-control" aria-label="Amount (to the nearest liter)"
+                name="liters">
+            <div class="input-group-append">
+                <span class="input-group-text">L</span>
+            </div>
+        </div>
+
+        Total price: {{gasPrice * liters}}
+    </form>
+
+</div>
